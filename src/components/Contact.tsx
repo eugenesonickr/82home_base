@@ -44,8 +44,8 @@ const Contact: React.FC = () => {
     {
       icon: MapPin,
       title: '본사 주소',
-      info: '서울특별시 용산구 청담로 40',
-      detail: '삼구빌딩 10층 (우편번호: 04376)',
+      info: '서울특별시 용산구 청파로 40',
+      detail: '삼구빌딩 10층 (우편번호: 04373)',
       color: 'from-red-500 to-pink-600',
       action: () => window.open('https://maps.google.com/?q=서울특별시+용산구+청담로+40', '_blank'),
     },
