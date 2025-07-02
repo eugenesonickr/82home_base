@@ -19,7 +19,9 @@ import {
   Building,
   Coffee,
   Zap,
-  Target
+  Target,
+  Calendar,
+  Shield
 } from 'lucide-react';
 
 const Services: React.FC = () => {
