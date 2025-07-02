@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Zap, 
+  Truck, 
   Mail, 
   Phone, 
   MapPin,
@@ -33,14 +33,15 @@ const Footer: React.FC = () => {
       { name: '채용정보', action: () => {}, external: true },
     ],
     services: [
-      { name: '웹 개발', id: 'services', external: false },
-      { name: '모바일 앱', id: 'services', external: false },
-      { name: '클라우드', id: 'services', external: false },
-      { name: '보안 솔루션', id: 'services', external: false },
+      { name: 'E-commerce Delivery', id: 'services', external: false },
+      { name: '대규모 유통사 Delivery', id: 'services', external: false },
+      { name: '시차제 Delivery', id: 'services', external: false },
+      { name: '음료 Delivery', id: 'services', external: false },
+      { name: 'Specialty Delivery', id: 'services', external: false },
     ],
     support: [
-      { name: '고객지원', id: 'contact', external: false },
-      { name: '기술문서', action: () => {}, external: true },
+      { name: '지입정보', id: 'contact', external: false },
+      { name: '배송 문의', id: 'contact', external: false },
       { name: 'FAQ', action: () => {}, external: false },
       { name: '온라인 상담', id: 'contact', external: false },
     ],
@@ -48,7 +49,7 @@ const Footer: React.FC = () => {
       { name: '개인정보처리방침', action: () => {}, external: true },
       { name: '이용약관', action: () => {}, external: true },
       { name: '사업자정보', action: () => {}, external: false },
-      { name: '라이선스', action: () => {}, external: true },
+      { name: '운송약관', action: () => {}, external: true },
     ],
   };
 
@@ -63,8 +64,8 @@ const Footer: React.FC = () => {
     <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white relative overflow-hidden">
       {/* 배경 장식 요소 */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-20 w-40 h-40 bg-primary-500 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-60 h-60 bg-secondary-500 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 left-20 w-40 h-40 bg-purple-500 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-60 h-60 bg-indigo-500 rounded-full blur-3xl"></div>
       </div>
       
       {/* Scroll to Top Button */}
@@ -76,7 +77,7 @@ const Footer: React.FC = () => {
         whileHover={{ scale: 1.1, y: -8 }}
         whileTap={{ scale: 0.9 }}
         onClick={scrollToTop}
-        className="absolute -top-6 right-8 bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white p-4 rounded-full shadow-2xl transition-all duration-300 backdrop-blur-sm"
+        className="absolute -top-6 right-8 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white p-4 rounded-full shadow-2xl transition-all duration-300 backdrop-blur-sm"
       >
         <ArrowUp size={20} />
       </motion.button>
@@ -99,25 +100,28 @@ const Footer: React.FC = () => {
                 onClick={scrollToTop}
               >
                 <div className="relative">
-                  <Zap className="h-10 w-10 text-primary-400" />
-                  <div className="absolute inset-0 bg-primary-400/20 rounded-full blur-lg"></div>
+                  <Truck className="h-10 w-10 text-purple-400" />
+                  <div className="absolute inset-0 bg-purple-400/20 rounded-full blur-lg"></div>
                 </div>
-                <span className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                  TechFlow
-                </span>
+                <div className="flex flex-col">
+                  <span className="text-sm font-normal text-gray-300">유진</span>
+                  <span className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    SONIC
+                  </span>
+                </div>
               </motion.div>
               
               <p className="text-gray-300 leading-relaxed max-w-md text-lg">
-                혁신적인 IT 솔루션으로 비즈니스의 디지털 전환을 이끄는 
-                TechFlow와 함께 미래를 만들어가세요.
+                라스트마일 딜리버리 No.1 전문 기업으로 
+                전국 네트워크를 통한 신속하고 정확한 배송 서비스를 제공합니다.
               </p>
 
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-primary-600/20 rounded-lg flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-primary-400" />
+                  <div className="w-10 h-10 bg-purple-600/20 rounded-lg flex items-center justify-center">
+                    <MapPin className="w-5 h-5 text-purple-400" />
                   </div>
-                  <span className="text-gray-300">서울특별시 강남구 테헤란로 123, TechFlow Tower 10층</span>
+                  <span className="text-gray-300">서울특별시 용산구 청파로 40, 삼구빌딩 10층</span>
                 </div>
                 <motion.div 
                   whileHover={{ x: 5 }}
@@ -126,7 +130,7 @@ const Footer: React.FC = () => {
                   <div className="w-10 h-10 bg-green-600/20 rounded-lg flex items-center justify-center">
                     <Phone className="w-5 h-5 text-green-400" />
                   </div>
-                  <span className="text-gray-300 hover:text-white transition-colors duration-200">02-1234-5678</span>
+                  <span className="text-gray-300 hover:text-white transition-colors duration-200">02-6925-6975</span>
                 </motion.div>
                 <motion.div 
                   whileHover={{ x: 5 }}
@@ -135,7 +139,7 @@ const Footer: React.FC = () => {
                   <div className="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center">
                     <Mail className="w-5 h-5 text-blue-400" />
                   </div>
-                  <span className="text-gray-300 hover:text-white transition-colors duration-200">contact@techflow.co.kr</span>
+                  <span className="text-gray-300 hover:text-white transition-colors duration-200">contact@eugenesonic.co.kr</span>
                 </motion.div>
               </div>
 
@@ -149,7 +153,7 @@ const Footer: React.FC = () => {
                     href={social.href}
                     whileHover={{ scale: 1.15, y: -3 }}
                     whileTap={{ scale: 0.9 }}
-                    className="bg-gray-800/50 hover:bg-primary-600 p-3 rounded-xl transition-all duration-300 backdrop-blur-sm border border-gray-700/50 hover:border-primary-500/50"
+                    className="bg-gray-800/50 hover:bg-purple-600 p-3 rounded-xl transition-all duration-300 backdrop-blur-sm border border-gray-700/50 hover:border-purple-500/50"
                     aria-label={social.label}
                   >
                     <social.icon size={20} />
@@ -173,7 +177,7 @@ const Footer: React.FC = () => {
                     <motion.button
                       whileHover={{ x: 4 }}
                       onClick={() => link.id ? scrollToSection(link.id) : link.action?.()}
-                      className="text-gray-300 hover:text-primary-400 transition-colors duration-200 text-left flex items-center gap-2 group"
+                      className="text-gray-300 hover:text-purple-400 transition-colors duration-200 text-left flex items-center gap-2 group"
                     >
                       {link.name}
                       {link.external && (
@@ -198,7 +202,7 @@ const Footer: React.FC = () => {
                     <motion.button
                       whileHover={{ x: 4 }}
                       onClick={() => link.id ? scrollToSection(link.id) : link.action?.()}
-                      className="text-gray-300 hover:text-primary-400 transition-colors duration-200 text-left flex items-center gap-2 group"
+                      className="text-gray-300 hover:text-purple-400 transition-colors duration-200 text-left flex items-center gap-2 group"
                     >
                       {link.name}
                       {link.external && (
@@ -223,7 +227,7 @@ const Footer: React.FC = () => {
                     <motion.button
                       whileHover={{ x: 4 }}
                       onClick={() => link.id ? scrollToSection(link.id) : link.action?.()}
-                      className="text-gray-300 hover:text-primary-400 transition-colors duration-200 text-left flex items-center gap-2 group"
+                      className="text-gray-300 hover:text-purple-400 transition-colors duration-200 text-left flex items-center gap-2 group"
                     >
                       {link.name}
                       {link.external && (
@@ -235,27 +239,21 @@ const Footer: React.FC = () => {
               </ul>
 
               <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700/50 backdrop-blur-sm">
-                <h4 className="font-semibold mb-3 text-primary-400 flex items-center gap-2">
+                <h4 className="font-semibold mb-3 text-purple-400 flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  뉴스레터 구독
+                  배송 문의
                 </h4>
                 <p className="text-gray-300 text-sm mb-4">
-                  최신 기술 동향과 소식을 받아보세요
+                  배송 관련 문의사항이 있으시면 언제든 연락주세요
                 </p>
-                <div className="flex gap-2">
-                  <input
-                    type="email"
-                    placeholder="이메일 주소"
-                    className="flex-1 px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-200"
-                  />
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-primary-600 hover:bg-primary-700 px-6 py-3 rounded-lg transition-all duration-200 font-semibold shadow-lg"
-                  >
-                    구독
-                  </motion.button>
-                </div>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => scrollToSection('contact')}
+                  className="w-full bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg transition-all duration-200 font-semibold shadow-lg"
+                >
+                  지입 문의하기
+                </motion.button>
               </div>
             </motion.div>
           </div>
@@ -272,7 +270,7 @@ const Footer: React.FC = () => {
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
             <div className="text-gray-400 text-sm flex items-center gap-2">
               <span>©</span>
-              <span>2024 TechFlow Corporation. All rights reserved.</span>
+              <span>2024 Eugene Sonic Corporation. All rights reserved.</span>
             </div>
             
             <div className="flex flex-wrap justify-center lg:justify-end space-x-6 text-sm">
@@ -281,7 +279,7 @@ const Footer: React.FC = () => {
                   key={index}
                   whileHover={{ y: -1 }}
                   onClick={() => link.action?.()}
-                  className="text-gray-400 hover:text-primary-400 transition-colors duration-200 flex items-center gap-1 group"
+                  className="text-gray-400 hover:text-purple-400 transition-colors duration-200 flex items-center gap-1 group"
                 >
                   {link.name}
                   {link.external && (
@@ -294,8 +292,8 @@ const Footer: React.FC = () => {
 
           <div className="mt-6 pt-6 border-t border-gray-700/30 text-center">
             <div className="text-gray-500 text-xs space-y-1">
-              <p>사업자등록번호: 123-45-67890 | 대표: 김테크 | 통신판매업신고: 2024-서울강남-1234</p>
-              <p>주소: 서울특별시 강남구 테헤란로 123, TechFlow Tower 10층</p>
+              <p>사업자등록번호: 250-87-00493 | 대표이사: 오영석 | 통신판매업신고: 경기도 여주시 주내로 841, 1층(북곡동)</p>
+              <p>주소: 서울특별시 용산구 청파로 40 삼구빌딩 10층 | TEL: 02-6925-6975</p>
             </div>
           </div>
         </motion.div>
