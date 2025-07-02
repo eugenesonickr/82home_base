@@ -1,0 +1,36 @@
+# 추가 헤더 설정 (netlify.toml과 함께 사용)
+
+/*
+  # 보안 헤더 강화
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://nvtylzlvtcmqxpobkwjh.supabase.co https://www.google-analytics.com; frame-ancestors 'none';
+  
+  # 성능 헤더
+  X-DNS-Prefetch-Control: on
+  X-Robots-Tag: index, follow
+
+/assets/*
+  # 정적 자산 최적화
+  Cache-Control: public, max-age=31536000, immutable
+  X-Content-Type-Options: nosniff
+
+/*.js
+  # JavaScript 압축 및 캐싱
+  Content-Encoding: gzip
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.css
+  # CSS 압축 및 캐싱
+  Content-Encoding: gzip
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff2
+  # 폰트 최적화
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+/api/*
+  # API 헤더
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Authorization

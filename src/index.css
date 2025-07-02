@@ -1,0 +1,190 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 접근성을 위한 기본 스타일 */
+@layer base {
+  /* 스크린 리더 전용 클래스 */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .focus\:not-sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  /* 포커스 스타일 개선 */
+  *:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  *:focus-visible {
+    outline: 2px solid #2563EB;
+    outline-offset: 2px;
+  }
+
+  /* 고대비 모드 지원 */
+  @media (prefers-contrast: high) {
+    .text-gray-600 {
+      @apply text-gray-900;
+    }
+    
+    .text-gray-400 {
+      @apply text-gray-700;
+    }
+    
+    .border-gray-200 {
+      @apply border-gray-900;
+    }
+  }
+
+  /* 애니메이션 감소 설정 */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* 다크모드 스크롤바 */
+  .dark {
+    scrollbar-color: #374151 #1f2937;
+  }
+
+  .dark::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .dark::-webkit-scrollbar-track {
+    background: #1f2937;
+  }
+
+  .dark::-webkit-scrollbar-thumb {
+    background: #374151;
+    border-radius: 4px;
+  }
+
+  .dark::-webkit-scrollbar-thumb:hover {
+    background: #4b5563;
+  }
+}
+
+/* 반응형 유틸리티 클래스 */
+@layer utilities {
+  /* 텍스트 크기 반응형 */
+  .text-responsive-xs {
+    @apply text-xs sm:text-sm;
+  }
+  
+  .text-responsive-sm {
+    @apply text-sm sm:text-base;
+  }
+  
+  .text-responsive-base {
+    @apply text-base sm:text-lg;
+  }
+  
+  .text-responsive-lg {
+    @apply text-lg sm:text-xl;
+  }
+  
+  .text-responsive-xl {
+    @apply text-xl sm:text-2xl;
+  }
+  
+  .text-responsive-2xl {
+    @apply text-2xl sm:text-3xl md:text-4xl;
+  }
+  
+  .text-responsive-3xl {
+    @apply text-3xl sm:text-4xl md:text-5xl;
+  }
+  
+  .text-responsive-4xl {
+    @apply text-4xl sm:text-5xl md:text-6xl;
+  }
+
+  /* 간격 반응형 */
+  .p-responsive {
+    @apply p-4 sm:p-6 lg:p-8;
+  }
+  
+  .px-responsive {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+  
+  .py-responsive {
+    @apply py-4 sm:py-6 lg:py-8;
+  }
+  
+  .m-responsive {
+    @apply m-4 sm:m-6 lg:m-8;
+  }
+  
+  .mx-responsive {
+    @apply mx-4 sm:mx-6 lg:mx-8;
+  }
+  
+  .my-responsive {
+    @apply my-4 sm:my-6 lg:my-8;
+  }
+
+  /* 그리드 반응형 */
+  .grid-responsive-1-2-3 {
+    @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+  }
+  
+  .grid-responsive-1-2-4 {
+    @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-4;
+  }
+  
+  .grid-responsive-2-3-4 {
+    @apply grid-cols-2 sm:grid-cols-3 lg:grid-cols-4;
+  }
+
+  /* 플렉스 반응형 */
+  .flex-responsive-col-row {
+    @apply flex-col sm:flex-row;
+  }
+  
+  .flex-responsive-row-col {
+    @apply flex-row sm:flex-col;
+  }
+
+  /* 숨김/표시 반응형 */
+  .hidden-mobile {
+    @apply hidden sm:block;
+  }
+  
+  .hidden-desktop {
+    @apply block sm:hidden;
+  }
+  
+  .mobile-only {
+    @apply sm:hidden;
+  }
+  
+  .desktop-only {
+    @apply hidden lg:block;
+  }
+}

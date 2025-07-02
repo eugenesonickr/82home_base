@@ -1,0 +1,171 @@
+# Netlify 배포 설정 파일
+[build]
+  # 빌드 명령어
+  command = "npm run build"
+  # 빌드 결과물 디렉토리
+  publish = "dist"
+  # Node.js 버전 지정
+  environment = { NODE_VERSION = "18" }
+
+# 빌드 최적화 설정
+[build.processing]
+  # CSS 압축
+  css = { bundle = true, minify = true }
+  # JavaScript 압축
+  js = { bundle = true, minify = true }
+  # 이미지 최적화
+  images = { compress = true }
+
+# 환경 변수 설정 (기본값)
+[build.environment]
+  # 빌드 환경
+  NODE_ENV = "production"
+  # Vite 빌드 최적화
+  VITE_BUILD_TARGET = "production"
+  # 번들 분석 비활성화 (프로덕션)
+  ANALYZE = "false"
+
+# 리다이렉트 규칙
+[[redirects]]
+  # SPA 라우팅 지원 (모든 경로를 index.html로)
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = { Role = ["admin"] }
+
+[[redirects]]
+  # API 프록시 (Supabase)
+  from = "/api/*"
+  to = "https://nvtylzlvtcmqxpobkwjh.supabase.co/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  # 구 도메인에서 새 도메인으로 리다이렉트
+  from = "https://old-domain.com/*"
+  to = "https://techflow.co.kr/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  # www 서브도메인 리다이렉트
+  from = "https://www.techflow.co.kr/*"
+  to = "https://techflow.co.kr/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  # HTTP to HTTPS 리다이렉트
+  from = "http://techflow.co.kr/*"
+  to = "https://techflow.co.kr/:splat"
+  status = 301
+  force = true
+
+# 헤더 설정
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # 보안 헤더
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    
+    # CORS 헤더
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    # 정적 자산 캐싱 (1년)
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    # JavaScript 파일 캐싱 (1년)
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    # CSS 파일 캐싱 (1년)
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    # 폰트 파일 캐싱 (1년)
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    # HTML 파일 캐싱 (1시간)
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    # 사이트맵 캐싱 (1일)
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    # robots.txt 캐싱 (1일)
+    Cache-Control = "public, max-age=86400"
+
+# 함수 설정 (Edge Functions)
+[functions]
+  # 함수 디렉토리
+  directory = "netlify/functions"
+  # 함수 런타임
+  node_bundler = "esbuild"
+
+# 플러그인 설정
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+  [plugins.inputs]
+    # Lighthouse 성능 측정
+    output_path = "lighthouse"
+
+[[plugins]]
+  package = "netlify-plugin-submit-sitemap"
+  [plugins.inputs]
+    # 사이트맵 자동 제출
+    baseUrl = "https://techflow.co.kr"
+    sitemapPath = "/sitemap.xml"
+    providers = [
+      "google",
+      "bing"
+    ]
+
+# 개발 환경 설정
+[dev]
+  command = "npm run dev"
+  port = 5173
+  publish = "dist"
+  autoLaunch = false
+
+# 컨텍스트별 설정
+[context.production]
+  command = "npm run build"
+  [context.production.environment]
+    NODE_ENV = "production"
+    VITE_APP_ENV = "production"
+
+[context.deploy-preview]
+  command = "npm run build"
+  [context.deploy-preview.environment]
+    NODE_ENV = "production"
+    VITE_APP_ENV = "preview"
+
+[context.branch-deploy]
+  command = "npm run build"
+  [context.branch-deploy.environment]
+    NODE_ENV = "production"
+    VITE_APP_ENV = "staging"

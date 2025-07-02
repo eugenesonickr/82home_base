@@ -1,0 +1,16 @@
+# Netlify 리다이렉트 규칙 (백업용)
+
+# API 프록시
+/api/* https://nvtylzlvtcmqxpobkwjh.supabase.co/:splat 200
+
+# 구 경로 리다이렉트
+/blog/* /news/:splat 301
+/company/* /about/:splat 301
+/contact-us /contact 301
+
+# 언어별 리다이렉트
+/en/* /?lang=en 302
+/ko/* /?lang=ko 302
+
+# SPA 라우팅 (마지막에 위치)
+/* /index.html 200

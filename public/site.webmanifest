@@ -1,0 +1,26 @@
+{
+  "name": "TechFlow - 혁신적인 IT 솔루션",
+  "short_name": "TechFlow",
+  "description": "비즈니스의 디지털 전환을 이끄는 IT 솔루션 전문기업",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#2563EB",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "orientation": "portrait-primary",
+  "categories": ["business", "technology", "productivity"],
+  "lang": "ko-KR",
+  "dir": "ltr"
+}
