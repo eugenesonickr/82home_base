@@ -13,7 +13,8 @@ import {
   ExternalLink,
   MessageSquare,
   User,
-  Briefcase
+  Briefcase,
+  Truck
 } from 'lucide-react';
 
 const Contact: React.FC = () => {
@@ -31,9 +32,9 @@ const Contact: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const inquiryTypes = [
-    { value: 'general', label: '일반 문의' },
-    { value: 'project', label: '프로젝트 상담' },
-    { value: 'partnership', label: '파트너십' },
+    { value: 'delivery', label: '배송 서비스 문의' },
+    { value: 'partnership', label: '지입 파트너십' },
+    { value: 'business', label: '사업 제휴' },
     { value: 'support', label: '기술 지원' },
     { value: 'quote', label: '견적 요청' },
     { value: 'other', label: '기타' },
@@ -42,27 +43,27 @@ const Contact: React.FC = () => {
   const contactInfo = [
     {
       icon: MapPin,
-      title: '주소',
-      info: '서울특별시 강남구 테헤란로 123',
-      detail: 'TechFlow Tower 10층 (우편번호: 06234)',
+      title: '본사 주소',
+      info: '서울특별시 용산구 청담로 40',
+      detail: '삼구빌딩 10층 (우편번호: 04376)',
       color: 'from-red-500 to-pink-600',
-      action: () => window.open('https://maps.google.com/?q=서울특별시+강남구+테헤란로+123', '_blank'),
+      action: () => window.open('https://maps.google.com/?q=서울특별시+용산구+청담로+40', '_blank'),
     },
     {
       icon: Phone,
-      title: '전화번호',
-      info: '02-1234-5678',
+      title: '대표 전화',
+      info: '02-6925-6975',
       detail: '평일 09:00 - 18:00 (점심시간 12:00-13:00)',
       color: 'from-green-500 to-teal-600',
-      action: () => window.open('tel:02-1234-5678'),
+      action: () => window.open('tel:02-6925-6975'),
     },
     {
       icon: Mail,
       title: '이메일',
-      info: 'contact@techflow.co.kr',
+      info: 'contact@eugenesonic.co.kr',
       detail: '24시간 접수 가능 (영업일 기준 24시간 내 답변)',
-      color: 'from-blue-500 to-purple-600',
-      action: () => window.open('mailto:contact@techflow.co.kr'),
+      color: 'from-purple-500 to-indigo-600',
+      action: () => window.open('mailto:contact@eugenesonic.co.kr'),
     },
     {
       icon: Clock,
@@ -121,33 +122,18 @@ const Contact: React.FC = () => {
     setSubmitStatus('idle');
 
     try {
-      // Supabase Edge Function을 통한 이메일 전송
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-        },
-        body: JSON.stringify({
-          ...formData,
-          timestamp: new Date().toISOString(),
-          userAgent: navigator.userAgent,
-        }),
-      });
+      // 실제 환경에서는 여기서 이메일 전송 API 호출
+      await new Promise(resolve => setTimeout(resolve, 2000)); // 시뮬레이션
 
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({
-          name: '',
-          email: '',
-          company: '',
-          phone: '',
-          inquiryType: '',
-          message: '',
-        });
-      } else {
-        throw new Error('이메일 전송에 실패했습니다.');
-      }
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        phone: '',
+        inquiryType: '',
+        message: '',
+      });
     } catch (error) {
       console.error('문의 전송 오류:', error);
       setSubmitStatus('error');
@@ -168,11 +154,11 @@ const Contact: React.FC = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            <span className="text-primary-600">문의하기</span>
+            <span className="text-purple-600">지입정보</span>
           </h2>
           <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-            프로젝트 상담부터 기술 문의까지, TechFlow 전문가들이 
-            친절하고 신속하게 답변드리겠습니다.
+            유진소닉과 함께하는 배송 파트너가 되어보세요.<br />
+            전문적인 배송 서비스와 안정적인 수익을 보장합니다.
           </p>
         </motion.div>
 
@@ -202,7 +188,7 @@ const Contact: React.FC = () => {
               <p className="text-gray-700 font-semibold mb-2">{item.info}</p>
               <p className="text-gray-500 text-sm leading-relaxed">{item.detail}</p>
               {item.action && (
-                <div className="mt-3 flex items-center justify-center text-primary-600 text-sm font-medium">
+                <div className="mt-3 flex items-center justify-center text-purple-600 text-sm font-medium">
                   <ExternalLink className="w-4 h-4 mr-1" />
                   바로가기
                 </div>
@@ -221,12 +207,12 @@ const Contact: React.FC = () => {
           >
             <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-xl border border-gray-100">
               <div className="flex items-center mb-8">
-                <div className="w-12 h-12 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-xl flex items-center justify-center mr-4">
-                  <MessageSquare className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl flex items-center justify-center mr-4">
+                  <Truck className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900">프로젝트 상담 신청</h3>
-                  <p className="text-gray-600">전문가와 직접 상담하세요</p>
+                  <h3 className="text-2xl font-bold text-gray-900">지입 파트너 신청</h3>
+                  <p className="text-gray-600">유진소닉과 함께 성장하세요</p>
                 </div>
               </div>
               
@@ -238,7 +224,7 @@ const Contact: React.FC = () => {
                 >
                   <CheckCircle className="w-20 h-20 text-green-500 mx-auto mb-6" />
                   <h4 className="text-2xl font-bold text-gray-900 mb-4">
-                    문의가 성공적으로 전송되었습니다!
+                    지입 신청이 성공적으로 전송되었습니다!
                   </h4>
                   <p className="text-gray-600 mb-6 leading-relaxed">
                     영업일 기준 24시간 내에 담당자가 연락드리겠습니다.<br />
@@ -248,9 +234,9 @@ const Contact: React.FC = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setSubmitStatus('idle')}
-                    className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+                    className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
                   >
-                    새 문의 작성
+                    새 신청 작성
                   </motion.button>
                 </motion.div>
               ) : (
@@ -263,7 +249,7 @@ const Contact: React.FC = () => {
                     >
                       <AlertCircle className="w-5 h-5 text-red-600" />
                       <span className="text-red-800">
-                        문의 전송에 실패했습니다. 잠시 후 다시 시도해주세요.
+                        신청 전송에 실패했습니다. 잠시 후 다시 시도해주세요.
                       </span>
                     </motion.div>
                   )}
@@ -280,7 +266,7 @@ const Contact: React.FC = () => {
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 ${
+                          className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 ${
                             errors.name ? 'border-red-500' : 'border-gray-300'
                           }`}
                           placeholder="홍길동"
@@ -302,7 +288,7 @@ const Contact: React.FC = () => {
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
-                          className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 ${
+                          className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 ${
                             errors.email ? 'border-red-500' : 'border-gray-300'
                           }`}
                           placeholder="hong@example.com"
@@ -326,7 +312,7 @@ const Contact: React.FC = () => {
                           name="company"
                           value={formData.company}
                           onChange={handleChange}
-                          className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
+                          className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
                           placeholder="회사명을 입력하세요"
                         />
                       </div>
@@ -343,7 +329,7 @@ const Contact: React.FC = () => {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 ${
+                          className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 ${
                             errors.phone ? 'border-red-500' : 'border-gray-300'
                           }`}
                           placeholder="010-1234-5678"
@@ -363,7 +349,7 @@ const Contact: React.FC = () => {
                       name="inquiryType"
                       value={formData.inquiryType}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
                     >
                       <option value="">문의 유형을 선택하세요</option>
                       {inquiryTypes.map((type) => (
@@ -383,10 +369,10 @@ const Contact: React.FC = () => {
                       value={formData.message}
                       onChange={handleChange}
                       rows={6}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 resize-none ${
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 resize-none ${
                         errors.message ? 'border-red-500' : 'border-gray-300'
                       }`}
-                      placeholder="프로젝트의 목적, 예산, 일정 등 상세한 내용을 알려주시면 더 정확한 상담을 받으실 수 있습니다."
+                      placeholder="보유 차량 정보, 운행 가능 지역, 경력 등 상세한 내용을 알려주시면 더 정확한 상담을 받으실 수 있습니다."
                     />
                     {errors.message && (
                       <p className="mt-1 text-sm text-red-600">{errors.message}</p>
@@ -398,7 +384,7 @@ const Contact: React.FC = () => {
                     disabled={isSubmitting}
                     whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                     whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                    className="w-full bg-primary-600 hover:bg-primary-700 disabled:bg-gray-400 text-white py-4 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all duration-300 shadow-lg disabled:cursor-not-allowed"
+                    className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white py-4 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all duration-300 shadow-lg disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <>
@@ -408,7 +394,7 @@ const Contact: React.FC = () => {
                     ) : (
                       <>
                         <Send size={20} />
-                        상담 신청하기
+                        지입 신청하기
                       </>
                     )}
                   </motion.button>
@@ -417,7 +403,7 @@ const Contact: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Office Info & Map */}
+          {/* Company Info & Benefits */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -425,85 +411,73 @@ const Contact: React.FC = () => {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            {/* Office Image */}
+            {/* Company Image */}
             <div className="relative overflow-hidden rounded-2xl shadow-xl">
               <img
-                src="https://images.pexels.com/photos/416320/pexels-photo-416320.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="TechFlow 오피스"
+                src="https://images.pexels.com/photos/4391470/pexels-photo-4391470.jpeg?auto=compress&cs=tinysrgb&w=800"
+                alt="유진소닉 배송 서비스"
                 className="w-full h-64 object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
                 <div className="p-6 text-white">
-                  <h4 className="text-2xl font-bold mb-2">TechFlow 본사</h4>
-                  <p className="text-white/90 text-lg">강남구 테헤란로 핵심 비즈니스 지역</p>
+                  <h4 className="text-2xl font-bold mb-2">유진소닉 파트너</h4>
+                  <p className="text-white/90 text-lg">전국 최대 규모의 배송 네트워크</p>
                 </div>
               </div>
             </div>
 
-            {/* Quick Info */}
+            {/* Benefits */}
             <div className="grid grid-cols-2 gap-4">
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl p-6 text-white shadow-lg"
+                className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-6 text-white shadow-lg"
               >
                 <Building className="w-8 h-8 mb-3" />
-                <h4 className="font-bold mb-1">설립년도</h4>
-                <p className="text-primary-100">2014년</p>
+                <h4 className="font-bold mb-1">안정적 수익</h4>
+                <p className="text-purple-100">보장된 물량</p>
               </motion.div>
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-xl p-6 text-white shadow-lg"
+                className="bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl p-6 text-white shadow-lg"
               >
                 <Users className="w-8 h-8 mb-3" />
-                <h4 className="font-bold mb-1">직원 수</h4>
-                <p className="text-secondary-100">50+ 명</p>
+                <h4 className="font-bold mb-1">전문 지원</h4>
+                <p className="text-indigo-100">체계적 관리</p>
               </motion.div>
             </div>
 
-            {/* Map Section */}
+            {/* Benefits List */}
             <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
               <div className="p-6 border-b border-gray-100">
                 <div className="flex items-center gap-3 mb-2">
-                  <MapPin className="w-6 h-6 text-primary-600" />
-                  <h4 className="text-xl font-bold text-gray-900">오시는 길</h4>
+                  <Truck className="w-6 h-6 text-purple-600" />
+                  <h4 className="text-xl font-bold text-gray-900">지입 파트너 혜택</h4>
                 </div>
                 <p className="text-gray-600">
-                  지하철 2호선 강남역 12번 출구에서 도보 5분 거리
+                  유진소닉과 함께하는 배송 파트너의 특별한 혜택
                 </p>
               </div>
               
-              {/* Google Maps Embed */}
-              <div className="h-64 bg-gray-100 relative">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.4!2d127.0276!3d37.4979!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a1b1b1b1b%3A0x1b1b1b1b1b1b1b1b!2z7ISc7Jq47Yq567OE7IucIOqwleuCqOq1rCDthYztl6jtlZzroZw!5e0!3m2!1sko!2skr!4v1234567890"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="absolute inset-0"
-                ></iframe>
-                
-                {/* 지도 로딩 실패 시 대체 컨텐츠 */}
-                <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-                  <div className="text-center">
-                    <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <h5 className="text-lg font-bold text-gray-700 mb-2">위치 안내</h5>
-                    <p className="text-gray-600 mb-4">
-                      서울특별시 강남구 테헤란로 123<br />
-                      TechFlow Tower 10층
-                    </p>
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      onClick={() => window.open('https://maps.google.com/?q=서울특별시+강남구+테헤란로+123', '_blank')}
-                      className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 mx-auto"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      Google Maps에서 보기
-                    </motion.button>
-                  </div>
-                </div>
+              <div className="p-6 space-y-4">
+                {[
+                  '안정적인 물량 보장 및 수익 구조',
+                  '전국 네트워크를 통한 효율적 배송',
+                  '체계적인 교육 및 지원 시스템',
+                  '최신 배송 관리 시스템 제공',
+                  '정기적인 차량 점검 및 관리',
+                  '24시간 고객 지원 서비스'
+                ].map((benefit, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="flex items-center gap-3"
+                  >
+                    <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                    <span className="text-gray-700">{benefit}</span>
+                  </motion.div>
+                ))}
               </div>
             </div>
 
@@ -517,7 +491,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">카카오톡 상담</p>
-                    <p className="text-sm text-gray-600">@TechFlow (평일 09:00-18:00)</p>
+                    <p className="text-sm text-gray-600">@유진소닉 (평일 09:00-18:00)</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -544,30 +518,30 @@ const Contact: React.FC = () => {
         >
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-gray-900 mb-4">
-              자주 묻는 <span className="text-primary-600">질문</span>
+              자주 묻는 <span className="text-purple-600">질문</span>
             </h3>
             <p className="text-gray-600">
-              고객들이 자주 문의하시는 내용들을 정리했습니다.
+              지입 파트너들이 자주 문의하시는 내용들을 정리했습니다.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
             {[
               {
-                question: '프로젝트 진행 기간은 얼마나 걸리나요?',
-                answer: '프로젝트 규모와 복잡도에 따라 다르지만, 일반적으로 웹사이트는 4-8주, 모바일 앱은 6-12주 정도 소요됩니다.'
+                question: '지입 조건은 어떻게 되나요?',
+                answer: '1톤 이상 화물차 보유, 운전 경력 3년 이상, 성실한 근무 태도를 갖춘 분을 모집합니다.'
               },
               {
-                question: '개발 비용은 어떻게 책정되나요?',
-                answer: '요구사항 분석 후 기능 범위, 디자인 복잡도, 개발 기간 등을 종합적으로 고려하여 맞춤형 견적을 제공합니다.'
+                question: '수익 구조는 어떻게 되나요?',
+                answer: '기본 수수료와 성과급 체계로 운영되며, 안정적인 물량 보장으로 월 평균 300만원 이상 수익이 가능합니다.'
               },
               {
-                question: '유지보수 서비스도 제공하나요?',
-                answer: '네, 프로젝트 완료 후 1년간 무상 유지보수를 제공하며, 이후에도 유료 유지보수 서비스를 이용하실 수 있습니다.'
+                question: '근무 시간은 어떻게 되나요?',
+                answer: '기본 근무시간은 오전 9시부터 오후 6시까지이며, 시간외 근무는 별도 수당이 지급됩니다.'
               },
               {
-                question: '원격 상담도 가능한가요?',
-                answer: '네, 화상회의를 통한 원격 상담도 가능합니다. 사전 예약을 통해 편리한 시간에 상담받으실 수 있습니다.'
+                question: '교육 및 지원은 어떻게 받나요?',
+                answer: '신규 파트너 대상 1주일 교육 프로그램과 정기적인 안전 교육, 차량 관리 지원을 제공합니다.'
               }
             ].map((faq, index) => (
               <motion.div

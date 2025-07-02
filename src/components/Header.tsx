@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X, Zap, ChevronDown } from 'lucide-react';
+import { Menu, X, Truck, ChevronDown } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useResponsive } from '../hooks/useResponsive';
 import { useKeyboardNavigation } from '../hooks/useKeyboardNavigation';
@@ -61,18 +61,25 @@ const Header: React.FC = () => {
   };
 
   const navItems = [
-    { name: t('nav.home'), id: 'home', hasDropdown: false },
-    { name: t('nav.about'), id: 'about', hasDropdown: false },
-    { name: t('nav.services'), id: 'services', hasDropdown: true, 
+    { name: 'Home', id: 'home', hasDropdown: false },
+    { name: '유진소닉', id: 'about', hasDropdown: true, 
       subItems: [
-        { name: '웹 개발', id: 'services' },
-        { name: '모바일 앱', id: 'services' },
-        { name: '클라우드', id: 'services' },
-        { name: '보안 솔루션', id: 'services' }
+        { name: '회사소개', id: 'about' },
+        { name: '연혁', id: 'about' },
+        { name: '조직도', id: 'about' }
       ]
     },
-    { name: t('nav.news'), id: 'news', hasDropdown: false },
-    { name: t('nav.contact'), id: 'contact', hasDropdown: false },
+    { name: 'Business', id: 'services', hasDropdown: true, 
+      subItems: [
+        { name: 'E-commerce Delivery', id: 'services' },
+        { name: '대규모 유통사 Delivery', id: 'services' },
+        { name: '시차제 Delivery', id: 'services' },
+        { name: '음료 Delivery', id: 'services' },
+        { name: 'Specialty Delivery', id: 'services' }
+      ]
+    },
+    { name: '채용', id: 'careers', hasDropdown: false },
+    { name: '지입정보', id: 'contact', hasDropdown: false },
   ];
 
   return (
@@ -106,16 +113,23 @@ const Header: React.FC = () => {
             }}
           >
             <div className="relative">
-              <Zap className={`h-8 w-8 transition-colors duration-300 ${
-                isScrolled ? 'text-primary-600' : 'text-white'
+              <Truck className={`h-8 w-8 transition-colors duration-300 ${
+                isScrolled ? 'text-purple-600' : 'text-white'
               }`} />
-              <div className="absolute inset-0 bg-primary-600/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-purple-600/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
-            <span className={`text-2xl font-bold transition-colors duration-300 ${
-              isScrolled ? 'text-gray-900 dark:text-white' : 'text-white'
-            }`}>
-              TechFlow
-            </span>
+            <div className="flex flex-col">
+              <span className={`text-sm font-normal transition-colors duration-300 ${
+                isScrolled ? 'text-gray-600 dark:text-gray-400' : 'text-white/80'
+              }`}>
+                유진
+              </span>
+              <span className={`text-xl font-bold transition-colors duration-300 ${
+                isScrolled ? 'text-purple-600 dark:text-purple-400' : 'text-white'
+              }`}>
+                SONIC
+              </span>
+            </div>
           </AccessibleButton>
 
           {/* Desktop Navigation */}
@@ -134,10 +148,10 @@ const Header: React.FC = () => {
                   className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg flex items-center gap-1 ${
                     activeSection === item.id
                       ? isScrolled 
-                        ? 'text-primary-600 bg-primary-50 dark:bg-primary-900/20' 
+                        ? 'text-purple-600 bg-purple-50 dark:bg-purple-900/20' 
                         : 'text-white bg-white/10'
                       : isScrolled 
-                        ? 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800' 
+                        ? 'text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-gray-50 dark:hover:bg-gray-800' 
                         : 'text-white/90 hover:text-white hover:bg-white/10'
                   }`}
                   motionProps={{
@@ -169,7 +183,7 @@ const Header: React.FC = () => {
                           variant="ghost"
                           size="sm"
                           ariaLabel={`${subItem.name}으로 이동`}
-                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors duration-200 rounded-none"
+                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors duration-200 rounded-none"
                           role="menuitem"
                           motionProps={{ whileHover: { x: 4 } }}
                         >
@@ -196,10 +210,10 @@ const Header: React.FC = () => {
               onClick={() => scrollToSection('contact')}
               variant={isScrolled ? 'primary' : 'outline'}
               size="sm"
-              ariaLabel="상담 문의 페이지로 이동"
+              ariaLabel="지입 문의 페이지로 이동"
               className={`hidden sm:block px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
                 isScrolled
-                  ? 'bg-primary-600 hover:bg-primary-700 text-white shadow-lg hover:shadow-xl'
+                  ? 'bg-purple-600 hover:bg-purple-700 text-white shadow-lg hover:shadow-xl'
                   : 'bg-white/10 hover:bg-white/20 text-white border border-white/30 hover:border-white/50 backdrop-blur-sm'
               }`}
               motionProps={{
@@ -207,7 +221,7 @@ const Header: React.FC = () => {
                 whileTap: { scale: 0.95 }
               }}
             >
-              {t('nav.consultation')}
+              지입 문의
             </AccessibleButton>
 
             {/* Mobile Menu Button */}
@@ -256,8 +270,8 @@ const Header: React.FC = () => {
                     ariaLabel={`${item.name} 섹션으로 이동`}
                     className={`block w-full text-left py-3 px-4 rounded-lg font-medium transition-all duration-200 ${
                       activeSection === item.id
-                        ? 'text-primary-600 bg-primary-50 dark:bg-primary-900/20'
-                        : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                        ? 'text-purple-600 bg-purple-50 dark:bg-purple-900/20'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-gray-50 dark:hover:bg-gray-800'
                     }`}
                     motionProps={{
                       whileHover: { x: 4 },
@@ -277,7 +291,7 @@ const Header: React.FC = () => {
                           variant="ghost"
                           size="sm"
                           ariaLabel={`${subItem.name}으로 이동`}
-                          className="block w-full text-left py-2 px-4 text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-25 dark:hover:bg-primary-900/10 rounded-lg transition-colors duration-200"
+                          className="block w-full text-left py-2 px-4 text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-25 dark:hover:bg-purple-900/10 rounded-lg transition-colors duration-200"
                           motionProps={{ whileHover: { x: 2 } }}
                         >
                           {subItem.name}
@@ -292,14 +306,14 @@ const Header: React.FC = () => {
               <AccessibleButton
                 onClick={() => scrollToSection('contact')}
                 variant="primary"
-                ariaLabel="상담 문의하기"
-                className="w-full mt-4 py-3 px-6 rounded-xl shadow-lg"
+                ariaLabel="지입 문의하기"
+                className="w-full mt-4 py-3 px-6 rounded-xl shadow-lg bg-purple-600 hover:bg-purple-700"
                 motionProps={{
                   whileHover: { scale: 1.02 },
                   whileTap: { scale: 0.98 }
                 }}
               >
-                {t('nav.consultation')}
+                지입 문의
               </AccessibleButton>
             </div>
           </motion.nav>
